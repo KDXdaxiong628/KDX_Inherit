@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 /*
-    继承
+    继承练习
  */
 namespace KDX_Inherit
 {
