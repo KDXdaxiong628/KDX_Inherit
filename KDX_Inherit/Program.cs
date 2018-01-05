@@ -69,6 +69,13 @@ namespace KDX_Inherit
     // 子类-dog类，继承动物类
     public class Dog : Pet
     {
+        // 定义一个委托
+        public delegate void Handler();
+        // 定义委托事件
+        public event Handler NewDog02;
+
+
+
         // 添加静态成员
         static int Num;
         static Dog()
@@ -81,6 +88,13 @@ namespace KDX_Inherit
             //_name = name;
             // base(name) 调用基类的构造函数
             ++Num;
+
+            // 触发事件（来了新狗就调用事件）
+            if (NewDog02 != null)
+            {
+                NewDog02();// 通知所有的订阅者
+            }
+            // NewDog?.Invoke();简写  通知所有接收者
         }
 
         // 重写父类方法
@@ -244,6 +258,17 @@ namespace KDX_Inherit
 
     }
 
+
+    // 定义一个想要狗的客户  接收者
+    class Client
+    {
+        public void WantADog()
+        {
+            // 被通知后就调用回调函数
+            Console.WriteLine("我想要一只狗");
+        }
+    }
+
     class Program
     {
         delegate void ActCute();
@@ -385,7 +410,23 @@ namespace KDX_Inherit
             ActCute del = null;
             Cat cat00 = new Cat("dasda");
             del = cat00.CeShiDeleage;// 注意 不需要打括号
+
+            // Lambda表达式
+            del += () =>
+            {
+                Console.WriteLine("我是一个Lambda表达式定义的方法，我什么都没做");
+            };
             del();
+
+            // 模拟客户
+            Client c1 = new Client();
+            Client c2 = new Client();
+            // 注册
+            //Dog.NewDog02 += c1.WantADog;
+            //Dog.NewDog02 += c2.WantADog;
+
+            Dog dog002 = new Dog("新来了一只狗");
+
 
 
             Console.Read();
