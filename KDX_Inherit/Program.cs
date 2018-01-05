@@ -32,6 +32,7 @@ namespace KDX_Inherit
 
         // 将虚方法修改为 抽象方法
         abstract public void Speak(string speak);
+
     }
 
     // 子类-dog类，继承动物类
@@ -49,6 +50,7 @@ namespace KDX_Inherit
         {
             Console.WriteLine("父类中---狗类---说话的方法---{0}", speak);
         }
+
     }
 
     // 子类-cat类，继承动物类
@@ -69,12 +71,39 @@ namespace KDX_Inherit
         }
 
         // 重写父类方法
+        /*
         override public void Speak(string speak)
         {
             Console.WriteLine("父类中---猫类---说话的方法---{0}", speak);
+        }*/
+
+        /*
+         密闭类 - 有些类不希望被其他人通过继承来修改
+         密闭方法 - 不希望某个方法被重写
+         */
+        // 添加sealed 使Speak方法变成 密封类 方法，不被子类重写等。（解释：比如猫类，它的叫声都是“miao miao”,不可能有别的，所以可以把speak方法变成密封类，猫下面的子类就不能改动）
+        sealed override public void Speak(string speak)
+        {
+            Console.WriteLine(_name + "父类中---猫类---说话的方法---{0}", speak);
         }
     }
 
+    // Cat的子类 - 波斯猫
+    public class PersianCat : Cat
+    {
+        public PersianCat(string name) : base(name)
+        {
+
+        }
+
+        // 如果在波斯猫这个类里面重写speak方法，编译器会报错
+        /*
+        override public void Speak(string speak)
+        {
+            Console.WriteLine(_name + "父类中---猫类---说话的方法---{0}", speak);
+        }*/
+
+    }
     class Program
     {
         static void Main(string[] args)
