@@ -105,6 +105,12 @@ namespace KDX_Inherit
         {
             Console.WriteLine("IsHappy: " + target.ToString());
         }
+
+        // 为泛型方法添加约束  必须传入一个class
+        public void IsHappy01<T>(T target) where T : class
+        {
+            Console.WriteLine("IsHappy: " + target.ToString());
+        }
     }
 
     /*
@@ -229,6 +235,11 @@ namespace KDX_Inherit
 
     }
 
+    public class Person
+    {
+
+    }
+
     class Program
     {
         static void Main(string[] args)
@@ -319,6 +330,10 @@ namespace KDX_Inherit
             // 调用泛型方法
             var dog04 = new Dog("C");
             dog04.IsHappy<int>(3);
+
+            // 调用有约束的泛型方法 - 只能传入class
+            var dog05 = new Dog("D");
+            dog05.IsHappy01<Person>(new Person());
 
             Console.Read();
         }
