@@ -83,6 +83,11 @@ namespace KDX_Inherit
             Console.WriteLine("狗的数量 = " + Num);
         }
 
+        // 自定义转换 - 隐式转换   把狗转换成猫
+        public static implicit operator Cat(Dog aDog)
+        {
+            return new Cat(aDog._name);
+        }
     }
 
     /*
@@ -139,6 +144,12 @@ namespace KDX_Inherit
         public void ClimbTree()
         {
             Console.WriteLine("Climb Treee");
+        }
+
+        // 猫 显示 的转换成 狗
+        public static explicit operator Dog(Cat aCat)
+        {
+            return new Dog(aCat._name);
         }
     }
 
@@ -215,6 +226,16 @@ namespace KDX_Inherit
             // 调用静态类  Dog类本身没有这个方法，是使用静态类来添加的
             Dog dog = new Dog("huahua");
             dog.HowToFeed();
+
+            Dog dog02 = new Dog("wangcai");
+            dog02.Speak("wangwang");
+            // 开始转换
+            Cat cat02 = dog02;
+            cat02.PrintName();// 打印出名字还是叫wangcai,只是现在是一只猫
+
+            Dog dog03 = (Dog)cat02; // 显示转换 ，要添加转换类型
+            dog03.PrintName();
+
 
             Console.Read();
         }
