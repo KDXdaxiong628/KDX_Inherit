@@ -58,11 +58,18 @@ namespace KDX_Inherit
     // 子类-dog类，继承动物类
     public class Dog : Pet
     {
+        // 添加静态成员
+        static int Num;
+        static Dog()
+        {
+            Num = 0;
+        }
         // 构造函数
         public Dog(string name) : base(name)
         {
             //_name = name;
             // base(name) 调用基类的构造函数
+            ++Num;
         }
 
         // 重写父类方法
@@ -71,6 +78,22 @@ namespace KDX_Inherit
             Console.WriteLine("父类中---狗类---说话的方法---{0}", speak);
         }
 
+        static public void ShowDogNum()
+        {
+            Console.WriteLine("狗的数量 = " + Num);
+        }
+
+    }
+
+    /*
+     * 使用静态类来扩展方法
+     */
+    static class PetGuide
+    {
+        static public void HowToFeed(this Dog dog)
+        {
+            Console.WriteLine("Play a video about how to feed dogs");
+        }
     }
 
     // 子类-cat类，继承动物类
@@ -185,6 +208,13 @@ namespace KDX_Inherit
             ICatchMice catchMice = (ICatchMice)cat01;// 强制转换
             cat01.CatchMice();
             catchMice.CatchMice();
+
+            // 调用静态函数 - 直接用类名调用
+            Dog.ShowDogNum();
+
+            // 调用静态类  Dog类本身没有这个方法，是使用静态类来添加的
+            Dog dog = new Dog("huahua");
+            dog.HowToFeed();
 
             Console.Read();
         }
