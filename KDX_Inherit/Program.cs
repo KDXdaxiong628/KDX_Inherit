@@ -175,7 +175,11 @@ namespace KDX_Inherit
             return new Dog(aCat._name);
         }
 
-
+        // 定义一个委托要调用的方法
+        public void CeShiDeleage()
+        {
+            Console.WriteLine("测试委托");
+        }
     }
 
     // Cat的子类 - 波斯猫
@@ -242,6 +246,8 @@ namespace KDX_Inherit
 
     class Program
     {
+        delegate void ActCute();
+
         static void Main(string[] args)
         {
             /*  没有添加构造方法之前
@@ -374,6 +380,13 @@ namespace KDX_Inherit
             pet.PrintName();
             pet = queue.Dequeue();// 出去
             pet.PrintName();
+
+            // 委托
+            ActCute del = null;
+            Cat cat00 = new Cat("dasda");
+            del = cat00.CeShiDeleage;// 注意 不需要打括号
+            del();
+
 
             Console.Read();
         }
