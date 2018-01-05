@@ -99,6 +99,12 @@ namespace KDX_Inherit
         {
             return new Cat(aDog._name);
         }
+
+        // 泛型方法
+        public void IsHappy<T>(T target)
+        {
+            Console.WriteLine("IsHappy: " + target.ToString());
+        }
     }
 
     /*
@@ -162,6 +168,8 @@ namespace KDX_Inherit
         {
             return new Dog(aCat._name);
         }
+
+
     }
 
     // Cat的子类 - 波斯猫
@@ -180,6 +188,47 @@ namespace KDX_Inherit
         }*/
 
     }
+
+    // 泛型测试 - 笼子 泛型类
+    public class Cage<T>
+    {
+        T[] array;// 存放东西的数组
+        readonly int Size;
+        int num;
+        public Cage(int n)
+        {
+            Size = n;
+            num = 0;
+            array = new T[Size];
+        }
+
+        public void Putin(T pet)
+        {
+            if (num < Size)
+            {
+                array[num++] = pet;
+            }
+            else
+            {
+                Console.WriteLine("cage is full");
+            }
+        }
+
+        public T Takeout()
+        {
+            if (num > 0)
+            {
+                return array[--num];// 移除数组最后一个
+            }
+            else
+            {
+                Console.WriteLine("cage is empty");
+                return default(T);
+            }
+        }
+
+    }
+
     class Program
     {
         static void Main(string[] args)
@@ -258,6 +307,19 @@ namespace KDX_Inherit
 
                 }
             }
+
+            // 泛型测试
+            var dogCage = new Cage<Dog>(1);
+            dogCage.Putin(new Dog("A"));
+            dogCage.Putin(new Dog("B"));
+
+            var dogTemp = dogCage.Takeout();
+            dogTemp.PrintName();
+
+            // 调用泛型方法
+            var dog04 = new Dog("C");
+            dog04.IsHappy<int>(3);
+
             Console.Read();
         }
     }
