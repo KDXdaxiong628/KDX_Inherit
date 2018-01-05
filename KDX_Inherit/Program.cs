@@ -35,13 +35,18 @@ namespace KDX_Inherit
         public Pet(string name)
         {
             _name = name;
+            _age = 0;// 测试重载运算符
         }
         protected string _name;//受保护的
+        protected int _age;
         public void PrintName()
         {
             Console.WriteLine("父类中---动物类---名字的方法---{0}", _name);
         }
-
+        public void ShowAge()
+        {
+            Console.WriteLine(_name + "`s Age = " + _age);
+        }
         /*
         // 父类虚方法（供子类重写）
         virtual public void Speak(string speak)
@@ -53,6 +58,12 @@ namespace KDX_Inherit
         // 将虚方法修改为 抽象方法
         abstract public void Speak(string speak);
 
+        // 重载运算符，让年龄自增
+        public static Pet operator ++(Pet pet)
+        {
+            ++pet._age;
+            return pet;
+        }
     }
 
     // 子类-dog类，继承动物类
@@ -237,6 +248,16 @@ namespace KDX_Inherit
             dog03.PrintName();
 
 
+            // 测试重载运算符
+            {
+                Pet[] pets01 = new Pet[] { new Dog("Jick012"), new Cat("Tom023") };
+                for (int i = 0; i < pets01.Length; i++)
+                {
+                    pets01[i]++;
+                    pets01[i].ShowAge();
+
+                }
+            }
             Console.Read();
         }
     }
