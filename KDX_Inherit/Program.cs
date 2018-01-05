@@ -9,6 +9,14 @@ using System.Threading.Tasks;
  */
 namespace KDX_Inherit
 {
+    // 定义一个结构 - 鱼  结构存储在栈中,这里定义了一个食物鱼的结构，不需要长期存贮，吃了就没有了
+    struct fish
+    {
+        int weight;
+        int size;
+        int type;
+    }
+
     // 定义一个接口 - 抓住一只老虎苏
     interface ICatchMice // 接口方法名首字母一般都是I 寓意inerface
     {
