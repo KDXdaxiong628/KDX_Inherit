@@ -9,6 +9,18 @@ using System.Threading.Tasks;
  */
 namespace KDX_Inherit
 {
+    // 定义一个接口 - 抓住一只老虎苏
+    interface ICatchMice // 接口方法名首字母一般都是I 寓意inerface
+    {
+        void CatchMice();// 默认是pubulic，但是不能加任何访问修饰符。不能有实现
+    }
+
+    // 定义一个 爬树接口
+    interface IClimbTree 
+    {
+        void ClimbTree();
+    }
+
     // 父类-动物类
     abstract public class Pet
     {
@@ -55,7 +67,7 @@ namespace KDX_Inherit
 
     // 子类-cat类，继承动物类
     // 隐藏父类方法 -- 类似重写
-    public class Cat : Pet
+    public class Cat : Pet, ICatchMice, IClimbTree
     {
         // 构造函数
         public Cat(string name) : base(name)
@@ -85,6 +97,17 @@ namespace KDX_Inherit
         sealed override public void Speak(string speak)
         {
             Console.WriteLine(_name + "父类中---猫类---说话的方法---{0}", speak);
+        }
+
+        // 因为Cat类添加了接口，所以必须要实现，而且加上public
+        public void CatchMice()
+        {
+            Console.WriteLine("Catch Mice");
+        }
+
+        public void ClimbTree()
+        {
+            Console.WriteLine("Climb Treee");
         }
     }
 
@@ -150,6 +173,10 @@ namespace KDX_Inherit
                 pets[i].PrintName(); // 没有重写PrintName方法，所以打印的是父类中的PrintName方法
             }
 
+            Cat cat01 = new Cat("Tom02");
+            ICatchMice catchMice = (ICatchMice)cat01;// 强制转换
+            cat01.CatchMice();
+            catchMice.CatchMice();
 
             Console.Read();
         }
