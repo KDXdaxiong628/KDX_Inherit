@@ -335,6 +335,46 @@ namespace KDX_Inherit
             var dog05 = new Dog("D");
             dog05.IsHappy01<Person>(new Person());
 
+
+            // 集合
+            List<Dog> list = new List<Dog>();
+            list.Add(new Dog("S"));
+            list.Add(new Dog("SS"));
+            list.Add(new Dog("SSS"));
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i].PrintName();
+            }
+
+            Dictionary<string, Dog> dic = new Dictionary<string, Dog>();
+            dic.Add("One", new Dog("B"));
+            dic.Add("Two", new Dog("BB"));
+            dic.Add("Three", new Dog("BBB"));
+            dic["Two"].PrintName();
+
+            // 栈 - 先进后出 ----  集合
+            Stack<Pet> stack = new Stack<Pet>();
+            stack.Push(new Dog("A"));
+            stack.Push(new Cat("B"));
+
+            stack.Peek().PrintName();// 打印最顶部的数据
+            stack.Pop();
+            stack.Peek().PrintName();
+
+            // 队列  先进先出
+            Queue<Pet> queue = new Queue<Pet>();
+            queue.Enqueue(new Dog("Aaaaaaaa"));
+            queue.Enqueue(new Dog("Bbbbbbbb"));
+            queue.Enqueue(new Dog("Cccccccc"));
+
+            Pet pet = null;
+            pet = queue.Dequeue();// 出去
+            pet.PrintName();
+            pet = queue.Dequeue();// 出去
+            pet.PrintName();
+            pet = queue.Dequeue();// 出去
+            pet.PrintName();
+
             Console.Read();
         }
     }
